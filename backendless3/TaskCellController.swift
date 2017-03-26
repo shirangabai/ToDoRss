@@ -1,7 +1,6 @@
 import UIKit
 
 class TaskCellController: UITableViewCell {
-
    
    @IBOutlet weak var img: UIImageView!
    @IBOutlet weak var lblTask: UILabel!
@@ -11,16 +10,13 @@ class TaskCellController: UITableViewCell {
    var task : Task?
    var backendless : Backendless!
    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+   override func awakeFromNib() {
+      super.awakeFromNib()
+   }
+   
+   override func setSelected(_ selected: Bool, animated: Bool) {
+      super.setSelected(selected, animated: animated)
+   }
    
    @IBAction func onValueChangeDone(_ sender: UISwitch) {
       task?.doneB = sender.isOn
@@ -36,7 +32,7 @@ class TaskCellController: UITableViewCell {
          print("fServer reported an error: \(fault)")
       })
    }
-
+   
    
    
 }

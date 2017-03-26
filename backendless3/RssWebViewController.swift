@@ -10,11 +10,10 @@ class RssWebViewController : UIViewController {
    }
    
    override func viewDidLoad() {
-      
       let url=URL(string: link)!;
       webView.loadRequest(URLRequest(url: url));
-
    }
+
    @IBAction func onClickClose(_ sender: UIButton) {
       dismiss(animated: true, completion: nil)
    }

@@ -18,12 +18,8 @@ class ViewController: UIViewController {
       backendless.userService.setStayLoggedIn( true )
       backendless.initApp(APP_ID, secret:SECRET_KEY, version:VERSION_NUM)
       
-      //registerUserAsync()
-      //loginUserAsync()
-      //logoutUserAsync()
       validUserTokenAsync()
    }
-   
    
    @IBAction func onClickSegment(_ sender: UISegmentedControl) {
       txtConfirmInput.isHidden = !txtConfirmInput.isHidden
@@ -32,13 +28,13 @@ class ViewController: UIViewController {
       txtConfirmInput.text = ""
    }
    
-   
    @IBAction func onClickOk(_ sender: UIButton) {
       let email = txtNameInput.text!.trim()
       let pass = txtPassInput.text!
       let confirm = txtConfirmInput.text!
       
       if email.isEmpty || pass.isEmpty {
+         U.createDialogOk(title: "Alert", msg: "All fields are required", mySelf: self)
          return
       }
       
@@ -49,12 +45,12 @@ class ViewController: UIViewController {
             if U.isValidEmail(testStr: email) {
                registerUserAsync(email: email, pass: pass)
             }else {
-               print("Invalid email")
+               U.createDialogOk(title: "Alert", msg: "Invalid email", mySelf: self)
             }
+         }else {
+            U.createDialogOk(title: "Alert", msg: "Password and verification do not match", mySelf: self)
          }
       }
-      
-      
    }
    
    func registerUserAsync(email: String , pass: String) {
@@ -63,44 +59,37 @@ class ViewController: UIViewController {
       user.password = pass as NSString
       
       backendless.userService.registering(user, response: { (registeredUser : BackendlessUser?) -> () in
-         //print("User has been registered (ASYNC): \(registeredUser)")
-         print("success")
          self.loginUserAsync(email: email, pass: pass)
-         //self.toSecondViewController()
       },error: { ( fault : Fault?) -> () in
-         print("\n\nServer reported an error: \(fault!)")
+         U.createDialogOk(title: "Alert", msg: "Server reported an error", mySelf: self)
       })
    }
    
    func loginUserAsync(email: String , pass: String) {
       backendless.userService.login(email, password: pass , response: { ( user : BackendlessUser?) -> () in
-         print("User logged: \(user!.email!)")
          self.toSecondViewController()
       },error: { ( fault : Fault?) -> () in
-         print("Server reported an error: \(fault!)")
+         U.createDialogOk(title: "Alert", msg: "At least one of the inputs is incorrect", mySelf: self)
       })
    }
    
    func validUserTokenAsync() {
       backendless.userService.isValidUserToken({ (result : NSNumber?) -> () in
-            print("isValidUserToken: \(result!==1)")
          self.toSecondViewController()
-            
       },error: { (fault : Fault?) -> () in
-            print("Server reported an error: \(fault!)")
+         U.createDialogOk(title: "Alert", msg: "Server reported an error", mySelf: self)
       })
    }
    
    func logoutUserAsync() {
       backendless.userService.logout({( user : Any?) -> () in
-            print("User logged out.")
-      },
-         error: { ( fault : Fault?) -> () in
-            print("Server reported an error: \(fault!)")
+         print("User logged out.")
+      },error: { ( fault : Fault?) -> () in
+         U.createDialogOk(title: "Alert", msg: "Server reported an error", mySelf: self)
       })
    }
    
-   
+      
    func toSecondViewController() {
       let next=storyboard!.instantiateViewController(withIdentifier: "id_second_view_controller");
       (next as! SecondController).setBackendless(backendless: backendless)

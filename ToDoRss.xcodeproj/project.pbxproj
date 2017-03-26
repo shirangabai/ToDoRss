@@ -439,10 +439,6 @@
 		6D575A801E70F8ED00AC5B63 = {
 			isa = PBXGroup;
 			children = (
-				6D46557E1E853BCE00E63081 /* dUIButton.swift */,
-				6D46557F1E853BCE00E63081 /* dUILabel.swift */,
-				6D4655801E853BCE00E63081 /* ViewFactory.swift */,
-				6D4655841E853DB900E63081 /* dView.swift */,
 				6D575AA51E70F9C800AC5B63 /* lib */,
 				6D575A8B1E70F8ED00AC5B63 /* backendless3 */,
 				6D575A8A1E70F8ED00AC5B63 /* Products */,
@@ -463,12 +459,13 @@
 			children = (
 				6D575A8C1E70F8ED00AC5B63 /* AppDelegate.swift */,
 				6D575A901E70F8ED00AC5B63 /* Main.storyboard */,
-				6DFEEE941E8296AC006F4B09 /* model */,
-				6DFEEE931E82961E006F4B09 /* controllers */,
-				6DFEEE951E8296F5006F4B09 /* Utils */,
 				6D575A931E70F8ED00AC5B63 /* Assets.xcassets */,
 				6D575A951E70F8ED00AC5B63 /* LaunchScreen.storyboard */,
 				6D575A981E70F8ED00AC5B63 /* Info.plist */,
+				6D5955BC1E884063003002A1 /* factoryView */,
+				6DFEEE941E8296AC006F4B09 /* model */,
+				6DFEEE931E82961E006F4B09 /* controllers */,
+				6DFEEE951E8296F5006F4B09 /* Utils */,
 			);
 			path = backendless3;
 			sourceTree = "<group>";
@@ -1008,6 +1005,18 @@
 				6D575C131E70F9C900AC5B63 /* libx264.a */,
 			);
 			path = lib;
+			sourceTree = "<group>";
+		};
+		6D5955BC1E884063003002A1 /* factoryView */ = {
+			isa = PBXGroup;
+			children = (
+				6D46557E1E853BCE00E63081 /* dUIButton.swift */,
+				6D46557F1E853BCE00E63081 /* dUILabel.swift */,
+				6D4655801E853BCE00E63081 /* ViewFactory.swift */,
+				6D4655841E853DB900E63081 /* dView.swift */,
+			);
+			name = factoryView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		6DFEEE931E82961E006F4B09 /* controllers */ = {

@@ -16,7 +16,10 @@ class AddTaskController : UIViewController{
    @IBAction func onClickOKAddTask(_ sender: UIButton) {
       
       let task = txtInputAddTask.text!.trim()
-      if task.isEmpty {return}
+      if task.isEmpty {
+         U.createDialogOk(title: "Alert", msg: "The task field is required", mySelf: self)
+         return
+      }
       let priority = segPriority.selectedSegmentIndex
       addTask(newTask: task, priority: priority )
    }
@@ -41,15 +44,10 @@ class AddTaskController : UIViewController{
       
       dataStore?.save(task, response: { (result: Any!) -> Void in
          let obj = result as! Task
-         print("Contact has been saved: \(obj.objectId)")
          self.parentController?.loadTasks()
 
          self.dismiss(animated: true, completion: nil)
       },error: { (fault: Fault?) -> Void in
-         print("fServer reported an error: \(fault)")
-      })
+         U.createDialogOk(title: "Alert", msg: "Server reported an error", mySelf: self)})
    }
-
-   
-   
 }

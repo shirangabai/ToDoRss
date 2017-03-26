@@ -21,10 +21,14 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
    }
    
    override func viewDidLoad() {
+         
       print(backendless.userService.currentUser.email)
       print(backendless.userService.currentUser.objectId)
       loadTasks()
       parseXML()
+      
+      
+
    }
    
    func parseXML(){
@@ -54,23 +58,30 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
          scrollView.addSubview(lbl as! UIView)
          
          let btn = factory.create(type: "button")
-         (btn as! UIButton).addTarget(self, action: #selector(onClick) , for: .touchUpInside)
+         (btn as! UIButton).addTarget(self, action: #selector(onClickThumb) , for: .touchUpInside)
          btn?.setProperties(xPosition: scrollView.frame.width * CGFloat(i) + 10, width: 70, link: rssList[i].getThumb()!,tag:i)
          scrollView.addSubview(btn as! UIView)
       }
    }
       
-   func onClick(btn:UIButton){
+   func onClickThumb(btn:UIButton){
       let next=storyboard!.instantiateViewController(withIdentifier: "id_rss_webview_controller")
       (next as! RssWebViewController).setLink(link: rssList[btn.tag].getLink()!)
       show(next, sender: self)
    }
    
-   
-   @IBAction func onClickLogout(_ sender: UIButton) {
+   func callbackSureLogout()  {
       logoutUserAsync()
       dismiss(animated: true, completion: nil)
    }
+   
+   @IBAction func onClickLogout(_ sender: UIButton) {
+      U.createDialogOkCancel(title: "Logout", msg: "Are you sure you want to log out", mySelf: self, callback: callbackSureLogout)
+      
+      
+   }
+   
+   
    
    @IBAction func onClickAddTask(_ sender: UIButton) {
       toAddTaskViewController()
@@ -159,19 +170,12 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
    
    func loadTasks(){
       let queryOptions = QueryOptions()
-      //queryOptions.sortBy = ["created DESC"]
       queryOptions.sortBy = [sort]
-      
-      
-      
-      
       
       let whereClause = "ownerId = '\(backendless.userService.currentUser.objectId!)'"
       let dataQuery = BackendlessDataQuery()
       dataQuery.whereClause = whereClause
-      
       dataQuery.queryOptions = queryOptions
-      
       
       let dataStore = backendless.data.of(Task.ofClass())!
       dataStore.find(dataQuery, response: {(result: BackendlessCollection?)->Void in
@@ -191,10 +195,7 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
       },error: { (fault: Fault?) -> Void in
          print("Server reported an del error: \(fault)")
       })
-      
    }
-   
-   //--------------------------
 }
 
 

@@ -1,5 +1,3 @@
-import Foundation
-
 class DynamicUIButton : UIButton , DynamicView{
    public func setProperties(xPosition:CGFloat , width:CGFloat , link:String , tag:Int){
       self.downloadedFrom(link: link)
@@ -10,9 +8,7 @@ class DynamicUIButton : UIButton , DynamicView{
       self.layer.shadowRadius = 5;
       self.layer.shadowOpacity = 0.5;
       self.tag = tag
-      
-      
    }
-   public func setProperties(xPosition:CGFloat , width:CGFloat , title:String){}
    
+   public func setProperties(xPosition:CGFloat , width:CGFloat , title:String){}
 }

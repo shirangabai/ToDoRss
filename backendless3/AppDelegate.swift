@@ -2,9 +2,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-   //change ggggggg shiran
-   
-   
    var window: UIWindow?
    
    
