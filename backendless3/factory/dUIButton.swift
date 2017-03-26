@@ -1,6 +1,6 @@
 import Foundation
 
-class dUIButton : UIButton , dView{
+class DynamicUIButton : UIButton , DynamicView{
    public func setProperties(xPosition:CGFloat , width:CGFloat , link:String , tag:Int){
       self.downloadedFrom(link: link)
       self.frame = CGRect(x: xPosition, y: 0, width: width, height: 70	)

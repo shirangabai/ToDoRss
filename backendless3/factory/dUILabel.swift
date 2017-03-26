@@ -1,6 +1,6 @@
 import Foundation
 
-class dUILabel : UILabel , dView {
+class DynamicUILabel : UILabel , DynamicView {
    
    public func setProperties(xPosition:CGFloat , width:CGFloat , title:String){
       self.text = title

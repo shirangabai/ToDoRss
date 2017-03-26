@@ -29,8 +29,8 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
    
    func parseXML(){
       let session = URLSession.shared
-      let baseUrl="http://one.co.il/RSS";
-      let url=URL(string: baseUrl)!;
+      let baseUrl="http://one.co.il/RSS"
+      let url=URL(string: baseUrl)!
       
       session.dataTask(with: url, completionHandler: {(d,r,e) in
          let entryParser = MyXMLParser(data: d!,tag: "item")
@@ -44,38 +44,26 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
    }
    
    func loadRssToScroll(){
-      
       let factory = ViewFactory()
       scrollView.frame.size.width = view.frame.width
       scrollView.contentSize.width = scrollView.frame.width * CGFloat(rssList.count)
       
       for i in 0..<rssList.count{
-         
-         
          let lbl = factory.create(type: "label")
-         lbl?.setProperties(xPosition: scrollView.frame.width * CGFloat(i) + 90,
-                           width: scrollView.frame.width,
-                           title: rssList[i].getTitle()!)
+         lbl?.setProperties(xPosition: scrollView.frame.width * CGFloat(i) + 90,width: scrollView.frame.width, title: rssList[i].getTitle()!)
          scrollView.addSubview(lbl as! UIView)
          
          let btn = factory.create(type: "button")
          (btn as! UIButton).addTarget(self, action: #selector(onClick) , for: .touchUpInside)
-         btn?.setProperties(xPosition: scrollView.frame.width * CGFloat(i) + 10,
-                           width: 70,
-                           link: rssList[i].getThumb()!,
-                           tag:i)
+         btn?.setProperties(xPosition: scrollView.frame.width * CGFloat(i) + 10, width: 70, link: rssList[i].getThumb()!,tag:i)
          scrollView.addSubview(btn as! UIView)
       }
    }
-   
-   
-   
-   
-   
+      
    func onClick(btn:UIButton){
-      let next=storyboard!.instantiateViewController(withIdentifier: "id_rss_webview_controller");
+      let next=storyboard!.instantiateViewController(withIdentifier: "id_rss_webview_controller")
       (next as! RssWebViewController).setLink(link: rssList[btn.tag].getLink()!)
-      show(next, sender: self);
+      show(next, sender: self)
    }
    
    
@@ -89,49 +77,39 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
    }
    
    func toAddTaskViewController() {
-      let next=storyboard!.instantiateViewController(withIdentifier: "id_add_task_controller");
+      let next=storyboard!.instantiateViewController(withIdentifier: "id_add_task_controller")
       (next as! AddTaskController).setBackendless(parentController: self)
-      show(next, sender: self);
+      show(next, sender: self)
    }
    
    @IBAction func onCkickSort(_ sender: UIButton) {
-      switch sender.tag {
-      case 0:
-         print("one")
-         if sort == "priority DESC"{
-            sort = "priority"
-         }else{
-            sort = "priority DESC"
-         }
-         
-      case 1:
-         print("two")
-         if sort == "created DESC"{
-            sort = "created"
-         }else{
-            sort = "created DESC"
-         }
-      case 2:
-         print("three")
-         if sort == "doneB DESC"{
-            sort = "doneB"
-         }else{
-            sort = "doneB DESC"
-         }
-      default: break
-      }
-      
       btnSort0.setImage(#imageLiteral(resourceName: "sortDisable"), for: .normal )
       btnSort1.setImage(#imageLiteral(resourceName: "sortDisable"), for: .normal )
       btnSort2.setImage(#imageLiteral(resourceName: "sortDisable"), for: .normal )
       
-      if sort.contains("DESC") {
-         sender.setImage(#imageLiteral(resourceName: "sortDown"), for: .normal )
-      }else {
-         sender.setImage(#imageLiteral(resourceName: "sortUp"), for: .normal)
+      func checkSort(category:String){
+         if sort == "\(category) DESC"{
+            sort = "\(category)"
+            sender.setImage(#imageLiteral(resourceName: "sortUp"), for: .normal)
+         }else{
+            sort = "\(category) DESC"
+            sender.setImage(#imageLiteral(resourceName: "sortDown"), for: .normal )
+         }
       }
+      
+      switch sender.tag {
+      case 0:
+         checkSort(category: "priority")
+      case 1:
+         checkSort(category: "created")
+      case 2:
+         checkSort(category: "doneB")
+      default: break
+      }
+      
       loadTasks()
       print (sort)
+      
    }
    
    //------------ table view ----------------------------

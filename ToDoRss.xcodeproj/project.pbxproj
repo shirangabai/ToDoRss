@@ -436,13 +436,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6D46557D1E853A7D00E63081 /* factory */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = factory;
-			sourceTree = "<group>";
-		};
 		6D575A801E70F8ED00AC5B63 = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +461,6 @@
 		6D575A8B1E70F8ED00AC5B63 /* backendless3 */ = {
 			isa = PBXGroup;
 			children = (
-				6D46557D1E853A7D00E63081 /* factory */,
 				6D575A8C1E70F8ED00AC5B63 /* AppDelegate.swift */,
 				6D575A901E70F8ED00AC5B63 /* Main.storyboard */,
 				6DFEEE941E8296AC006F4B09 /* model */,
