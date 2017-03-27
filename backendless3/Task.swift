@@ -4,6 +4,7 @@ class Task : NSObject {
    
    override init() {}
    
+   //backendless table
    var objectId : String?
    var ownerId : String?
    var task : String=""

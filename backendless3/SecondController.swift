@@ -47,6 +47,7 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
       }).resume()
    }
    
+   //Loading dynamic elements(views) to the RSS line, loading occurs once when view controller did loading
    func loadRssToScroll(){
       let factory = ViewFactory()
       scrollView.frame.size.width = view.frame.width
@@ -77,11 +78,7 @@ class SecondController : UIViewController , UITableViewDelegate , UITableViewDat
    
    @IBAction func onClickLogout(_ sender: UIButton) {
       U.createDialogOkCancel(title: "Logout", msg: "Are you sure you want to log out", mySelf: self, callback: callbackSureLogout)
-      
-      
    }
-   
-   
    
    @IBAction func onClickAddTask(_ sender: UIButton) {
       toAddTaskViewController()

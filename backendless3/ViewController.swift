@@ -28,6 +28,7 @@ class ViewController: UIViewController {
       txtConfirmInput.text = ""
    }
    
+   //Click OK after filling out the registration or login with data
    @IBAction func onClickOk(_ sender: UIButton) {
       let email = txtNameInput.text!.trim()
       let pass = txtPassInput.text!
@@ -38,8 +39,10 @@ class ViewController: UIViewController {
          return
       }
       
+      //login state
       if segment.selectedSegmentIndex == 1 {
          loginUserAsync(email: email, pass: pass)
+      //register state
       }else {
          if confirm == pass {
             if U.isValidEmail(testStr: email) {
@@ -73,6 +76,7 @@ class ViewController: UIViewController {
       })
    }
    
+   //check valid token for auto login
    func validUserTokenAsync() {
       backendless.userService.isValidUserToken({ (result : NSNumber?) -> () in
          self.toSecondViewController()

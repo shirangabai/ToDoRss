@@ -43,9 +43,7 @@ class AddTaskController : UIViewController{
       let dataStore = parentController!.backendless.data.of(Task.ofClass())
       
       dataStore?.save(task, response: { (result: Any!) -> Void in
-         let obj = result as! Task
          self.parentController?.loadTasks()
-
          self.dismiss(animated: true, completion: nil)
       },error: { (fault: Fault?) -> Void in
          U.createDialogOk(title: "Alert", msg: "Server reported an error", mySelf: self)})
